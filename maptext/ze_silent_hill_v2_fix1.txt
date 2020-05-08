@@ -2,27 +2,27 @@
 {
 	"35s open door"
 	{
-		"chi"		"** **"
+		"chi"		"35秒后门开"
 	}
 	"10s teleport"
 	{
-		"chi"		"** **"
+		"chi"		"10秒后传送"
 	}
 	"30s open door"
 	{
-		"chi"		"** **"
+		"chi"		"30秒后门开"
 	}
 	"30s door open"
 	{
-		"chi"		"** **"
+		"chi"		"30秒后门开"
 	}
 	"25s open door"
 	{
-		"chi"		"** **"
+		"chi"		"25秒后门开"
 	}
 	"30s elevator up"
 	{
-		"chi"		"** **"
+		"chi"		"30秒后电梯上升"
 	}
 	"sync_version"
 	{
@@ -30,26 +30,26 @@
 	}
 	"30s wall break"
 	{
-		"chi"		"** **"
+		"chi"		"30秒后墙碎"
 	}
 	"25s teleport"
 	{
-		"chi"		"** **"
+		"chi"		"25秒后传送"
 	}
 	"3s move"
 	{
-		"chi"		"** **"
+		"chi"		"3秒后平台移动"
 	}
 	"45s move"
 	{
-		"chi"		"** **"
+		"chi"		"45秒后平台移动"
 	}
 	"15s open door"
 	{
-		"chi"		"** **"
+		"chi"		"15秒后门开*"
 	}
 	"Run"
 	{
-		"chi"		"** **"
+		"chi"		"快跑"
 	}
 }
