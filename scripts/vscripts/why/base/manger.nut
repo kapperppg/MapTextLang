@@ -28,6 +28,22 @@ const LOG_MSG=4;
         ScriptPrintMessageCenterAll("<font color='#00ff00'>脚本debug："+text+"</font>");
     }
 }
+function Precache(){
+    EntFireByHandle(self,"RunScriptCode","CheckPlayerInfo()",3,null,null);
+};
+function CheckPlayerInfo(){
+    player <- null;
+    while( (player = Entities.FindByClassname(player,"*")) != null ) {
+        if (player.GetClassname() == "player") {
+            if(GetPlayerByHandle(player)==null){
+                player.__KeyValueFromString("rendercolor", "0 255 0");
+            }
+        }
+    }
+    ScriptPrintMessageChatAll(" \x02疑似因stripper生成加载存在延迟，变为绿色的玩家请重进服务器，以免神器等级保存不生效！！！\x01");
+    ScriptPrintMessageChatAll(" \x02疑似因stripper生成加载存在延迟，变为绿色的玩家请重进服务器，以免神器等级保存不生效！！！\x01");
+    ScriptPrintMessageChatAll(" \x02疑似因stripper生成加载存在延迟，变为绿色的玩家请重进服务器，以免神器等级保存不生效！！！\x01");
+}
 gameevents_proxy<-null;
 GameEventsCapturedPlayer <- null;
 function PlayerUse(uid,eid) {
