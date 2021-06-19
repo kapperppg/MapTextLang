@@ -28,9 +28,7 @@ const LOG_MSG=4;
         ScriptPrintMessageCenterAll("<font color='#00ff00'>脚本debug："+text+"</font>");
     }
 }
-function Precache(){
-    EntFireByHandle(self,"RunScriptCode","CheckPlayerInfo()",3,null,null);
-};
+FIRST_LOAD<-true;
 function CheckPlayerInfo(){
     player <- null;
     while( (player = Entities.FindByClassname(player,"*")) != null ) {
@@ -98,6 +96,10 @@ function SetPlayerHandle(uid,handle){
     return true;
 }
 function Think() {
+    if(FIRST_LOAD){
+        EntFireByHandle(self,"RunScriptCode","CheckPlayerInfo()",3,null,null);
+        FIRST_LOAD=false;
+    }
     if("LevelInit" in self.GetScriptScope()){LevelInit();}
     if ( gameevents_proxy==null || !gameevents_proxy.IsValid() ) {
         gameevents_proxy <- Entities.CreateByClassname("info_game_event_proxy");
