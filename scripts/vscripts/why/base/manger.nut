@@ -38,9 +38,10 @@ function CheckPlayerInfo(){
             }
         }
     }
-    ScriptPrintMessageChatAll(" \x02疑似因stripper生成加载存在延迟，变为绿色的玩家请重进服务器，以免神器等级保存不生效！！！\x01");
-    ScriptPrintMessageChatAll(" \x02疑似因stripper生成加载存在延迟，变为绿色的玩家请重进服务器，以免神器等级保存不生效！！！\x01");
-    ScriptPrintMessageChatAll(" \x02疑似因stripper生成加载存在延迟，变为绿色的玩家请重进服务器，以免神器等级保存不生效！！！\x01");
+    ScriptPrintMessageChatAll(" \x02疑似因stripper生成加载存在延迟，变为绿色以及进入比较早的玩家请重进服务器，以免神器等级保存不生效！！！\x01");
+    ScriptPrintMessageChatAll(" \x02疑似因stripper生成加载存在延迟，变为绿色以及进入比较早的玩家请重进服务器，以免神器等级保存不生效！！！\x01");
+    ScriptPrintMessageChatAll(" \x02疑似因stripper生成加载存在延迟，变为绿色以及进入比较早的玩家请重进服务器，以免神器等级保存不生效！！！\x01");
+    FIRST_LOAD<-false;
 }
 gameevents_proxy<-null;
 GameEventsCapturedPlayer <- null;
@@ -96,10 +97,6 @@ function SetPlayerHandle(uid,handle){
     return true;
 }
 function Think() {
-    if(FIRST_LOAD){
-        EntFireByHandle(self,"RunScriptCode","CheckPlayerInfo()",3,null,null);
-        FIRST_LOAD=false;
-    }
     if("LevelInit" in self.GetScriptScope()){LevelInit();}
     if ( gameevents_proxy==null || !gameevents_proxy.IsValid() ) {
         gameevents_proxy <- Entities.CreateByClassname("info_game_event_proxy");
