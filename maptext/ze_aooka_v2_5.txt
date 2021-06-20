@@ -44,9 +44,9 @@
 	{
 		"chi"		"**解星**"
 	}
-	"<Zombie second kill has been banned>"
+	"<Some zombie items have been disabled>"
 	{
-		"chi"		"**<僵尸秒杀已被禁用>**"
+		"chi"		"**<部分僵尸神器已被禁用>**"
 	}
 	"***Luo Xing Yun Mang ***"
 	{
@@ -204,7 +204,7 @@
 	{
 		"chi"		"**普通攻击---5**"
 	}
-	"<It's safe for the time being...>"
+	"<Its safe for the time being...>"
 	{
 		"chi"		"**<我们暂时安全了...>**"
 	}
