@@ -37,7 +37,7 @@ bxzl_text_array <- [
     },//1
 
     { 
-        array_message="魂出电入 - 地面深色区域火焰伤害,且安全区内远离闪电"
+        array_message="魂出电入 - 地面深色区域火焰伤害\n面对小地图箭头前后方向,去两边没有球状闪电的安全区"
         array_holdtime=5.0
     },//2
 
