@@ -55,10 +55,10 @@ function PlayerUse(uid,eid) {
     }
 }
 class Player{
-    userid=0;
-    name=null;
-    steamid=null;
-    handle = null;
+    userid = 0;
+    name = "";
+    steamid = "";
+    handle = "";
     connected = true;
     itemInfo = "";
     constructor(_u,_s,_n){userid=_u;steamid=_s;name=_n;}
@@ -175,9 +175,6 @@ function RestoreAllPlayerItemLevel(){
         }
     }
     ScriptPrintMessageChatAll(" \x04神器等级还原执行完毕！\x01");
-}
-function GetPlayerInfo(){
-    ScriptPrintMessageChatAll(" \x04GetPlayerInfo(uid):获取脚本内玩家信息，输入uid以查询\x01");
 }
 function GetPlayerInfo(uid){
     local pl=GetPlayerByUid(uid);
