@@ -28,8 +28,9 @@ const LOG_MSG=4;
         ScriptPrintMessageCenterAll("<font color='#00ff00'>脚本debug："+text+"</font>");
     }
 }
-FIRST_LOAD<-true;
+FIRST_LOAD<-3;
 function CheckPlayerInfo(){
+    if(FIRST_LOAD<0)return;
     player <- null;
     while( (player = Entities.FindByClassname(player,"*")) != null ) {
         if (player.GetClassname() == "player") {
@@ -38,10 +39,10 @@ function CheckPlayerInfo(){
             }
         }
     }
-    ScriptPrintMessageChatAll(" \x02疑似因stripper生成加载存在延迟，变为绿色以及进入比较早的玩家请重进服务器，以免神器等级保存不生效！！！\x01");
-    ScriptPrintMessageChatAll(" \x02疑似因stripper生成加载存在延迟，变为绿色以及进入比较早的玩家请重进服务器，以免神器等级保存不生效！！！\x01");
-    ScriptPrintMessageChatAll(" \x02疑似因stripper生成加载存在延迟，变为绿色以及进入比较早的玩家请重进服务器，以免神器等级保存不生效！！！\x01");
-    FIRST_LOAD<-false;
+    ScriptPrintMessageChatAll(" \x02疑似因stripper生成加载存在延迟，变为绿色以及跟随切换地图连接服务器的玩家请重进服务器，以免神器等级保存不生效！！！\x01");
+    ScriptPrintMessageChatAll(" \x02疑似因stripper生成加载存在延迟，变为绿色以及跟随切换地图连接服务器的玩家请重进服务器，以免神器等级保存不生效！！！\x01");
+    ScriptPrintMessageChatAll(" \x02疑似因stripper生成加载存在延迟，变为绿色以及跟随切换地图连接服务器的玩家请重进服务器，以免神器等级保存不生效！！！\x01");
+    FIRST_LOAD--;
 }
 gameevents_proxy<-null;
 GameEventsCapturedPlayer <- null;
