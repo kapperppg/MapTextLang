@@ -114,11 +114,27 @@ bxzl_text_array <- [
         array_message="有玩家跳上了冰神器的平台，触发僵尸传送,同时后面第二道门开启"
         array_holdtime=0.5
     },//18
+    { 
+        array_message="script by bxzl on 2021.06.20"
+        array_holdtime=5
+    },//19
+    { 
+        array_message="改动一 增加神器拾取提示"
+        array_holdtime=5
+    },//20
+    { 
+        array_message="改动二 增加第三关BOSS技能详细提示"
+        array_holdtime=5
+    },//21
+    { 
+        array_message="改动三 第三关BOSS战时僵尸所有技能禁用"
+        array_holdtime=5
+    },//22
 ];
 
 function Say_ScriptDate()
 {
-	bxzl_text = Entities.FindByName(null,"bxzl_text");
+    bxzl_text = Entities.FindByName(null,"bxzl_text");
     Bxzl_Item_Water_Gametext = Entities.FindByName(null,"Bxzl_Item_Water_Gametext");
     Bxzl_Item_Gold_Gametext = Entities.FindByName(null,"Bxzl_Item_Gold_Gametext");
     Bxzl_Item_Electro_Gametext = Entities.FindByName(null,"Bxzl_Item_Electro_Gametext");
@@ -133,34 +149,37 @@ function Say_ScriptDate()
     Bxzl_Item_Zgravity_Gametext = Entities.FindByName(null,"Bxzl_Item_Zgravity_Gametext");
     Bxzl_Item_Zfire_Gametext = Entities.FindByName(null,"Bxzl_Item_Zfire_Gametext");
     Bxzl_Item_Zwarp_Gametext = Entities.FindByName(null,"Bxzl_Item_Zwarp_Gametext");
-	EntFire("cmd","Command","say script by bxzl(冰雪葬泪) on 2021.06.17--神器效果和BOSS技能提示",0.00,null);
+    EntFire("cmd","Command","say script by bxzl on 2021.06.20",0.00,null);
+    EntFire("cmd","Command","改动一 增加神器拾取时候提示",1.00,null);
+    EntFire("cmd","Command","改动二 增加第三关BOSS技能详细提示",2.00,null);
+    EntFire("cmd","Command","改动三 第三关BOSS战时僵尸所有技能禁用",3.00,null);
 }
 
 function Set_ItemText()
 {
     if (Bxzl_Item_Water_Gametext != null)
     {
-        Bxzl_Item_Water_Gametext.__KeyValueFromString("message", "水神器\n按E使用时在持有者正面生成一个跟随直线推力水,能推开同时减速僵尸\n持续时间: 7秒\n用水神器的时候会将人类火神器的效果清除\n能对第二关和第三关BOSS造成300点伤害");
+        Bxzl_Item_Water_Gametext.__KeyValueFromString("message", "水神器\n按E使用时在持有者正面生成一个跟随直线推力水\n推开同时减速近距离僵尸\n持续时间: 7秒\n用水神器的时候会将人类火神器的效果清除\n能对第二关和第三关BOSS造成300点伤害");
     }
     if (Bxzl_Item_Gold_Gametext != null)
     {
-        Bxzl_Item_Gold_Gametext.__KeyValueFromString("message", "金轮神器\n按E使用时在正面生成一个固定隐形圆柱形墙,能卡住在里面的玩家\n持续时间: 7秒或者墙被僵尸挠碎\n第三关BOSS战时使用能消除落星陨芒的效果");
+        Bxzl_Item_Gold_Gametext.__KeyValueFromString("message", "金轮神器\n按E使用时在正面生成一个固定隐形圆柱形墙\n持续时间: 7秒或者墙被僵尸挠碎\n第三关BOSS战时使用能消除落星陨芒的效果");
     }
     if (Bxzl_Item_Electro_Gametext != null)
     {
-        Bxzl_Item_Electro_Gametext.__KeyValueFromString("message", "电神器\n按E使用时在持有者正面生成一个跟随直线电光,减速僵尸\n持续时间: 3秒\n能对第二关和第三关BOSS造成75点伤害");
+        Bxzl_Item_Electro_Gametext.__KeyValueFromString("message", "电神器\n按E使用时在持有者正面生成一个跟随直线电光\n减速僵尸\n持续时间: 3秒\n能对第二关和第三关BOSS造成75点伤害");
     }
     if (Bxzl_Item_Wind_Gametext != null)
     {
-        Bxzl_Item_Wind_Gametext.__KeyValueFromString("message", "风神器\n按E使用时在持有者周围形成跟随环形风,推开僵尸\n持续时间: 7秒");
+        Bxzl_Item_Wind_Gametext.__KeyValueFromString("message", "风神器\n按E使用时在持有者周围形成跟随环形风\n推开僵尸\n持续时间: 7秒");
     }
     if (Bxzl_Item_Fire_Gametext != null)
     {
-        Bxzl_Item_Fire_Gametext.__KeyValueFromString("message", "火神器\n按E使用时在正前方生成固定圆形火圈,燃烧并伤害僵尸\n持续时间: 7秒\n能对第二关和第三关BOSS造成300点伤害");
+        Bxzl_Item_Fire_Gametext.__KeyValueFromString("message", "火神器\n按E使用时在正前方生成固定圆形火圈\n燃烧并伤害僵尸\n持续时间: 7秒\n用火神器的时候会将人类冰神器的效果清除\n能对第二关和第三关BOSS造成300点伤害");
     }
     if (Bxzl_Item_Heal_Gametext != null)
     {
-        Bxzl_Item_Heal_Gametext.__KeyValueFromString("message", "奶神器\n按E使用时在持有者周围形成跟随治疗圈,将人类恢复到250血和给与在奶里人类的防抓效果\n持续时间: 5秒");
+        Bxzl_Item_Heal_Gametext.__KeyValueFromString("message", "奶神器\n按E使用时在持有者周围形成跟随治疗圈\n将人类恢复到250血和给与在奶里人类的防抓效果\n持续时间: 5秒");
     }
     if (Bxzl_Item_Ice_Gametext != null)
     {
@@ -173,15 +192,15 @@ function Set_ItemText()
 
     if (Bxzl_Item_Zshield_Gametext != null)
     {
-        Bxzl_Item_Zshield_Gametext.__KeyValueFromString("message", "僵尸护盾神器\n按E使用时在持有者周围跟随圆柱形护盾,无视人类的子弹高爆伤害,同时反伤射击的人类\n持续时间: 5秒");
+        Bxzl_Item_Zshield_Gametext.__KeyValueFromString("message", "僵尸护盾神器\n按E使用时在持有者周围跟随圆柱形护盾\n无视人类的子弹高爆伤害,同时反伤射击的人类\n持续时间: 5秒");
     }
     if (Bxzl_Item_Zbgold_Gametext != null)
     {
-        Bxzl_Item_Zbgold_Gametext.__KeyValueFromString("message", "僵尸破坏金轮神器\n按E使用时将人类正在生效的金轮神器破坏,同时给与持有者2.5倍的加速效果\n持续时间: 破坏效果瞬间,加速效果5秒");
+        Bxzl_Item_Zbgold_Gametext.__KeyValueFromString("message", "僵尸破坏金轮神器\n按E使用时将人类正在生效的金轮神器破坏\n同时给与持有者2.5倍的加速效果\n持续时间: 破坏效果瞬间,加速效果5秒");
     }
     if (Bxzl_Item_Zice_Gametext != null)
     {
-        Bxzl_Item_Zice_Gametext.__KeyValueFromString("message", "僵尸冰神器\n按E使用时冻住持有者正前方的人类3秒,右键使用时发射出一个移动的冰球,冻住触碰的人类\n持续时间: 按E技能0.5秒");
+        Bxzl_Item_Zice_Gametext.__KeyValueFromString("message", "僵尸冰神器\n按E使用时冻住持有者正前方的人类3秒\n右键使用时发射出一个移动的冰球,冻住触碰的人类\n持续时间: 按E技能0.5秒");
     }
     if (Bxzl_Item_Zgravity_Gametext != null)
     {
@@ -189,7 +208,7 @@ function Set_ItemText()
     }
     if (Bxzl_Item_Zfire_Gametext != null)
     {
-        Bxzl_Item_Zfire_Gametext.__KeyValueFromString("message", "僵尸火神器\n按E使用时燃烧持有者正前方的人类6秒,右键使用时发射出一个移动的火球,燃烧触碰的人类\n持续时间: 按E技能0.5秒");
+        Bxzl_Item_Zfire_Gametext.__KeyValueFromString("message", "僵尸火神器\n按E使用时燃烧持有者正前方的人类6秒\n右键使用时发射出一个移动的火球,燃烧触碰的人类\n持续时间: 按E技能0.5秒");
     }
     if (Bxzl_Item_Zwarp_Gametext != null)
     {
