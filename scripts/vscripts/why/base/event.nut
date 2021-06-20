@@ -8,7 +8,7 @@ function PlayerDisconnect(){
 	local p=this.event_data;
 	logText("disconnect 触发");
 	logTableText(p);
-	EntFire("why_map_data","RunScriptCode",format("Disconnected(\"%s\")",p.networkid.tostring()),0.00,null);
+	EntFire("why_map_data","RunScriptCode",format("Disconnected(%d,\"%s\")",p.userid,p.networkid.tostring()),0.00,null);
 }
 function PlayerUse(){
 	local p=this.event_data;
