@@ -126,10 +126,6 @@ bxzl_text_array <- [
         array_message="改动二 增加第三关BOSS技能详细提示"
         array_holdtime=5
     },//21
-    { 
-        array_message="改动三 第三关BOSS战时僵尸所有技能禁用"
-        array_holdtime=5
-    },//22
 ];
 
 function Say_ScriptDate()
@@ -152,7 +148,6 @@ function Say_ScriptDate()
     EntFire("cmd","Command","say script by bxzl on 2021.06.20",0.00,null);
     EntFire("cmd","Command","改动一 增加神器拾取时候提示",1.00,null);
     EntFire("cmd","Command","改动二 增加第三关BOSS技能详细提示",2.00,null);
-    EntFire("cmd","Command","改动三 第三关BOSS战时僵尸所有技能禁用",3.00,null);
 }
 
 function Set_ItemText()
