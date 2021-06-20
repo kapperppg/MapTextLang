@@ -28,9 +28,8 @@ const LOG_MSG=4;
         ScriptPrintMessageCenterAll("<font color='#00ff00'>脚本debug："+text+"</font>");
     }
 }
-FIRST_LOAD<-3;
+SAVE_LEVEL_SWITCH<-true;
 function CheckPlayerInfo(){
-    if(FIRST_LOAD<0)return;
     player <- null;
     while( (player = Entities.FindByClassname(player,"*")) != null ) {
         if (player.GetClassname() == "player") {
@@ -42,7 +41,6 @@ function CheckPlayerInfo(){
     ScriptPrintMessageChatAll(" \x02疑似因stripper生成加载存在延迟，变为绿色以及跟随切换地图连接服务器的玩家请重进服务器，以免神器等级保存不生效！！！\x01");
     ScriptPrintMessageChatAll(" \x02疑似因stripper生成加载存在延迟，变为绿色以及跟随切换地图连接服务器的玩家请重进服务器，以免神器等级保存不生效！！！\x01");
     ScriptPrintMessageChatAll(" \x02疑似因stripper生成加载存在延迟，变为绿色以及跟随切换地图连接服务器的玩家请重进服务器，以免神器等级保存不生效！！！\x01");
-    FIRST_LOAD--;
 }
 gameevents_proxy<-null;
 GameEventsCapturedPlayer <- null;
@@ -62,8 +60,9 @@ class Player{
     steamid=null;
     handle = null;
     connected = true;
-    itemInfo = null;
+    itemInfo = "";
     constructor(_u,_s,_n){userid=_u;steamid=_s;name=_n;}
+    constructor(_u){userid=_u;}
 }
 PLAYER_LIST<-[];
 function GetPlayerByUid(uid){
@@ -92,13 +91,16 @@ function GetPlayerBySteamId(sid){
 }
 function SetPlayerHandle(uid,handle){
     local pl=GetPlayerByUid(uid);
-    if(pl==null)return false;
+    if(pl==null){
+        PLAYER_LIST.push(Player(uid));
+    }
+    pl=GetPlayerByUid(uid);
     pl.handle=handle;
     RestoreItemLevel(pl);
     return true;
 }
 function Think() {
-    if("LevelInit" in self.GetScriptScope()){LevelInit();}
+    //if("LevelInit" in self.GetScriptScope()){LevelInit();}
     if ( gameevents_proxy==null || !gameevents_proxy.IsValid() ) {
         gameevents_proxy <- Entities.CreateByClassname("info_game_event_proxy");
         gameevents_proxy.__KeyValueFromString("event_name","player_use");
@@ -119,6 +121,10 @@ function Think() {
         }
     }
 }
+function Init(){
+    if("LevelInit" in self.GetScriptScope()){LevelInit();}
+    ScriptPrintMessageChatAll(" \x04玩家等级保存已加载，如果存在任何问题请直接联系；by：健忘症晚期-2021-06-20\x01");
+}
 function Connected(uid,sid,name){
     if(sid=="BOT")return;
     local pl=GetPlayerBySteamId(sid);
@@ -128,9 +134,11 @@ function Connected(uid,sid,name){
     }
     pl.userid=uid;pl.name=name;pl.connected=true;
 }
-function Disconnected(sid){
+function Disconnected(uid,sid){
     local pl=GetPlayerBySteamId(sid);
-    pl.userid=null;pl.handle=null;pl.connected=false;
+    if(pl==null)pl=GetPlayerByUid(uid);
+    if(pl==null)return;
+    pl.steamid=sid;pl.connected=false;
 }
 function RoundStart(){
     for(local i=0;i<PLAYER_LIST.len();i++){
@@ -147,6 +155,7 @@ function ItemPickup(uid,itemName){
     }
 }
 function RestoreItemLevel(pl){
+    if(!SAVE_LEVEL_SWITCH)return;
     try{
         if(pl.itemInfo!=null&&pl.itemInfo!=""){
             pl.handle.__KeyValueFromString("targetname", pl.itemInfo);
@@ -154,4 +163,27 @@ function RestoreItemLevel(pl){
     }catch(e){
         logText(e);
     }
+}
+function RestoreAllPlayerItemLevel(){
+    if(!SAVE_LEVEL_SWITCH){
+        ScriptPrintMessageChatAll(" \x02神器等级还原功能已关闭！\x01");
+        return;
+    }
+    for(local i=0;i<PLAYER_LIST.len();i++){
+        if(PLAYER_LIST[i].handle!=null&&PLAYER_LIST[i].handle.IsValid()){
+            RestoreItemLevel(PLAYER_LIST[i]);
+        }
+    }
+    ScriptPrintMessageChatAll(" \x04神器等级还原执行完毕！\x01");
+}
+function GetPlayerInfo(){
+    ScriptPrintMessageChatAll(" \x04GetPlayerInfo(uid):获取脚本内玩家信息，输入uid以查询\x01");
+}
+function GetPlayerInfo(uid){
+    local pl=GetPlayerByUid(uid);
+    if(pl==null){
+        ScriptPrintMessageChatAll(" \x02玩家信息不存在，可能是uid错误\x01");
+        return;
+    }
+    ScriptPrintMessageChatAll(format(" \x04玩家名：%s；steamid：%s；是否在服务器中：%s；等级信息：%s\x01",pl.name,pl.steamid,pl.handle.IsValid().tostring(),pl.itemInfo.tostring()));
 }
