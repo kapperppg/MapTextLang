@@ -3,13 +3,13 @@ const LOG_CONSOLE=1;
 const LOG_CHAT=2;
 const LOG_MSG=4;
 ::logText <- function(text){
-    if(LOG_LEVEL&1){
+    if(LOG_LEVEL&LOG_CONSOLE){
         printl(text);
     }
-    if(LOG_LEVEL&2){
+    if(LOG_LEVEL&LOG_CHAT){
         ScriptPrintMessageChatAll(" \x04脚本debug\x01："+text);
     }
-    if(LOG_LEVEL&4){
+    if(LOG_LEVEL&LOG_MSG){
         ScriptPrintMessageCenterAll("<font color='#00ff00'>脚本debug："+text+"</font>");
     }
 }
@@ -58,7 +58,7 @@ class Player{
     userid = 0;
     name = "";
     steamid = "";
-    handle = "";
+    handle = null;
     connected = true;
     itemInfo = "";
     constructor(_u,_s,_n){userid=_u;steamid=_s;name=_n;}
@@ -123,7 +123,7 @@ function Think() {
 }
 function Init(){
     if("LevelInit" in self.GetScriptScope()){LevelInit();}
-    ScriptPrintMessageChatAll(" \x04玩家等级保存已加载，如果存在任何问题请直接联系；by：健忘症晚期-2021-06-20\x01");
+    ScriptPrintMessageChatAll(" \x07玩家等级保存已加载，如果存在任何问题请直接联系；by：健忘症晚期-2021-06-21\x01");
 }
 function Connected(uid,sid,name){
     if(sid=="BOT")return;
@@ -138,7 +138,7 @@ function Disconnected(uid,sid){
     local pl=GetPlayerBySteamId(sid);
     if(pl==null)pl=GetPlayerByUid(uid);
     if(pl==null)return;
-    pl.steamid=sid;pl.connected=false;
+    pl.steamid=sid;pl.handle=null;pl.connected=false;
 }
 function RoundStart(){
     for(local i=0;i<PLAYER_LIST.len();i++){
@@ -182,5 +182,5 @@ function GetPlayerInfo(uid){
         ScriptPrintMessageChatAll(" \x02玩家信息不存在，可能是uid错误\x01");
         return;
     }
-    ScriptPrintMessageChatAll(format(" \x04玩家名：%s；steamid：%s；是否在服务器中：%s；等级信息：%s\x01",pl.name,pl.steamid,pl.handle.IsValid().tostring(),pl.itemInfo.tostring()));
+    ScriptPrintMessageChatAll(format(" \x04玩家名：%s；steamid：%s；是否在服务器中：%s；等级信息：%s\x01",pl.name,pl.steamid,pl.connected.tostring(),pl.itemInfo.tostring()));
 }
