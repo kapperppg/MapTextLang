@@ -206,13 +206,13 @@ function ExtremeModeVote()
 		local extoggle = !extreme;
 		ResetMap();
 		extreme = extoggle;
-		local cmode="NORMAL";if(extreme)cmode="EXTREME";
-		EntFire("server","Command","say ["+cmode+" MODE VOTE] PASSED - SLAYING",0.00,activator);
-		EntFire("server","Command","say ["+cmode+" MODE VOTE] PASSED - SLAYING",0.01,activator);
-		EntFire("server","Command","say ["+cmode+" MODE VOTE] PASSED - SLAYING",0.02,activator);
-		EntFire("server","Command","say ["+cmode+" MODE VOTE] PASSED - SLAYING",0.03,activator);
-		EntFire("server","Command","say ["+cmode+" MODE VOTE] PASSED - SLAYING",0.04,activator);
-		EntFire("extremevote_gtext","AddOutput","message ["+cmode+" MODE VOTE] PASSED - SLAYING",0.02,null);
+		local cmode="普通";if(extreme)cmode="EX";
+		EntFire("server","Command","say ["+cmode+" 模式投票] 通过 - 处死全部人类",0.00,activator);
+		EntFire("server","Command","say ["+cmode+" 模式投票] 通过 - 处死全部人类",0.01,activator);
+		EntFire("server","Command","say ["+cmode+" 模式投票] 通过 - 处死全部人类",0.02,activator);
+		EntFire("server","Command","say ["+cmode+" 模式投票] 通过 - 处死全部人类",0.03,activator);
+		EntFire("server","Command","say ["+cmode+" 模式投票] 通过 - 处死全部人类",0.04,activator);
+		EntFire("extremevote_gtext","AddOutput","message ["+cmode+" 模式投票] 通过 - 处死全部人类",0.02,null);
 		EntFire("extremevote_gtext","Display","",0.03,null);
 		EntFireByHandle(self,"RunScriptCode"," KillAllButton(); ",0.05,null,null);
 	}
@@ -227,7 +227,7 @@ function WarnVoteShowMessage()
 		if(exmvote_gtext==null||!exmvote_gtext.IsValid())
 			return;
 	}
-	exmvote_gtext.__KeyValueFromString("message","[EXTREME MODE VOTE]\nGet ready to vote at the start of the next round\nYou can do this by shooting straight up in the spawn-area\nYou have ~"+(10+stagepickdelay.tointeger()).tostring()+" seconds to vote\nIt's your vote, do just as you wish!");
+	exmvote_gtext.__KeyValueFromString("message","[EX模式提醒]\n准备好下一回合投票\n你可以射击出生地的天空进行投票\n你有 "+(10+stagepickdelay.tointeger()).tostring()+" 秒的投票时间\n");
 	EntFireByHandle(exmvote_gtext,"Display","",0.01,null,null);
 }
 
@@ -235,15 +235,15 @@ function ExtremeModeVoteShowMessage()
 {
 	if(!exmvote_voteallowed)return;
 	EntFireByHandle(self,"RunScriptCode"," ExtremeModeVoteShowMessage(); ",0.02,null,null);
-	local cmode = "EXTREME";
-	if(extreme)cmode = "NORMAL";
+	local cmode = "EX";
+	if(extreme)cmode = "普通";
 	if(exmvote_gtext==null||!exmvote_gtext.IsValid())
 	{
 		exmvote_gtext = Entities.FindByName(null,"extremevote_gtext");
 		if(exmvote_gtext==null||!exmvote_gtext.IsValid())
 			return;
 	}
-	exmvote_gtext.__KeyValueFromString("message","["+cmode+" MODE VOTE]\nYou can vote by shooting straight up\nVotes: ("+exmvote_playervotes.tostring()+"/"+((exmvote_playercount*EXMVOTE_PERCENTAGE)/100).tointeger().tostring()+")");
+	exmvote_gtext.__KeyValueFromString("message","["+cmode+" 模式投票]\n射击出生地的天空进行投票\n投票人数: ("+exmvote_playervotes.tostring()+"/"+((exmvote_playercount*EXMVOTE_PERCENTAGE)/100).tointeger().tostring()+")");
 	EntFireByHandle(exmvote_gtext,"Display","",0.01,null,null);
 }
 
